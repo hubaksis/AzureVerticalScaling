@@ -1,3 +1,5 @@
+Azure App Service Plan vertical scaling (changing tier, not the number of instances)
+
 1. Create automation account
 2. Import modules Az.Accounts and Az.websites
 3. Create powershell runbook
