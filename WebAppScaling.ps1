@@ -65,3 +65,30 @@ Write-Output "Current App Service Plan status: $($appService.Status), tier: $($a
 #    $webApp.SiteConfig.AlwaysOn = $true
 #    Set-AzWebApp -WebApp $webApp
 #}
+
+
+<#
+Bonus - switch your database to the specific tier
+
+
+$dbResourceGroupName = "RG"
+$dbServerName = "server_name"
+$dbName = "db_name"
+$dbTierName = "S0"
+
+$sqlDB = Get-AzSqlDatabase -ResourceGroupName $dbResourceGroupName -ServerName $dbServerName -DatabaseName $dbName 
+
+Write-Output "DB name: $($sqlDB.DatabaseName)" | timestamp 
+Write-Output "Current DB status: $($sqlDB.Status), edition: $($sqlDB.Edition), tier: $($sqlDB.CurrentServiceObjectiveName)" | timestamp 
+
+$sqlDB | Set-AzSqlDatabase -RequestedServiceObjectiveName $dbTierName
+ 
+$sqlDB = Get-AzSqlDatabase -ResourceGroupName $dbResourceGroupName -ServerName $dbServerName -DatabaseName $dbName 
+
+Write-Output "DB name: $($sqlDB.DatabaseName)" | timestamp 
+Write-Output "Current DB status: $($sqlDB.Status), edition: $($sqlDB.Edition), tier: $($sqlDB.CurrentServiceObjectiveName)" | timestamp 
+
+
+
+
+#>
